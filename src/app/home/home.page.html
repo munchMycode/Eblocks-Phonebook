@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Phonebook
+    </ion-title>
+
+    <!-- Add contact ** -->
+    <ion-buttons slot="end" (click)="addContact()">
+      <ion-icon slot="icon-only" ios="add-outline" md="add-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  
+  <ion-toolbar>
+    <!-- debounce determines lag between keystrokes ** -->
+    <ion-searchbar [debounce]="200" (ionInput)="findContact($event)" animated="true" placeholder="Search"></ion-searchbar>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <ion-list>
+
+      <!-- List Item **-->
+      <ion-item-sliding *ngFor="let contact of contacts; let i = index;">
+
+        <!-- Item label/Text -->
+        <ion-item>
+          <ion-label >
+            {{ contact.name }}
+            <p>{{contact.phone}}</p>
+          </ion-label>
+          
+        </ion-item>
+        
+
+        <!-- Item Options -->
+        <ion-item-options>
+          
+          <!-- Options Item ** -->
+          <ion-item-option color="primary" (click)="deleteContact(contact,i)">
+            <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+          </ion-item-option>
+
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+    </ion-list>
+
+  
+
+</ion-content>
